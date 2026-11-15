@@ -122,7 +122,13 @@
   }
   .cover.opening .cover-card{transform:translateY(-14px) scale(.97);opacity:0}
   .cover .kicker{margin-bottom:6px}
-  .rk{display:block;width:min(260px, 74vw);max-height:34svh;margin:4px auto 2px;overflow:visible}
+  .rk-frame{
+    width:min(340px, 88vw);aspect-ratio:880/957;max-height:46svh;margin:0 auto -6px;
+    overflow:hidden;
+    -webkit-mask-image:radial-gradient(ellipse closest-side at 50% 50%, #000 66%, transparent 100%);
+            mask-image:radial-gradient(ellipse closest-side at 50% 50%, #000 66%, transparent 100%);
+  }
+  .rk-frame .rk{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 50%;mix-blend-mode:multiply}
   .cover .names{font-size:clamp(40px, 11vw, 56px)}
   body.ml .cover .names{font-size:clamp(30px, 8.5vw, 40px)}
   .cover .date-line{margin-top:10px}
@@ -137,14 +143,8 @@
   .cover-fade.out{opacity:0}
 
   /* little Krishna & Radha */
-  .rk .kr,.rk .ra{transform-box:fill-box;transform-origin:50% 100%;animation:sway 3.4s ease-in-out infinite}
-  .rk .ra{animation-delay:-1.7s}
-  .rk .hf{animation:float 3s ease-in-out infinite}
-  .rk .tw{transform-box:fill-box;transform-origin:center;animation:twinkle 2.6s ease-in-out infinite}
-  .rk .tw:nth-of-type(2){animation-delay:-.9s}.rk .tw:nth-of-type(3){animation-delay:-1.8s}
-  @keyframes sway{0%,100%{transform:rotate(-2deg)}50%{transform:rotate(2deg)}}
-  @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
-  @keyframes twinkle{0%,100%{opacity:.25;transform:scale(.7)}50%{opacity:1;transform:scale(1)}}
+  .rk{animation:breathe 14s ease-in-out infinite alternate;transform-origin:50% 55%}
+  @keyframes breathe{from{transform:scale(1)}to{transform:scale(1.05)}}
 
   /* petals */
   .petals{position:fixed;inset:0;pointer-events:none;z-index:40;overflow:hidden}
@@ -263,7 +263,7 @@
     .cover{padding-top:16px;padding-bottom:16px}
     .cover-card{border-radius:24px;padding:18px 24px;width:min(520px, 100%)}
     .cover-card::before{border-radius:18px}
-    .rk{max-height:30svh}
+    .rk-frame{height:36svh;width:auto;max-height:none}
     .cover .names{font-size:38px}
     .cover .date-line{margin-top:4px}
     .open-btn{margin-top:12px}
@@ -314,86 +314,7 @@
     <div class="cover-fade" id="coverFade">
       <p class="kicker" data-i18n="coverKicker"></p>
 
-      <svg class="rk" viewBox="16 4 212 192" role="img" data-i18n-label="rkAlt" aria-label="Little Krishna and Radha">
-        <ellipse cx="122" cy="185" rx="92" ry="6" fill="#b8893b" opacity=".14"/>
-
-        <!-- twinkles -->
-        <path class="tw" d="M36 52l1.8 5 5 1.8-5 1.8-1.8 5-1.8-5-5-1.8 5-1.8z" fill="#d9bd84"/>
-        <path class="tw" d="M210 40l1.6 4.4 4.4 1.6-4.4 1.6-1.6 4.4-1.6-4.4-4.4-1.6 4.4-1.6z" fill="#d9bd84"/>
-        <path class="tw" d="M140 18l1.3 3.6 3.6 1.3-3.6 1.3-1.3 3.6-1.3-3.6-3.6-1.3 3.6-1.3z" fill="#e48aa8"/>
-
-        <!-- floating heart -->
-        <g class="hf"><path d="M122 52s-9-5.5-11.5-11C108.8 37 111.4 32 116 32c2.6 0 4.3 1.4 6 3.6 1.7-2.2 3.4-3.6 6-3.6 4.6 0 7.2 5 5.5 9-2.5 5.5-11.5 11-11.5 11z" fill="#e48aa8"/></g>
-
-        <!-- ground lotuses -->
-        <g>
-          <ellipse cx="30" cy="182" rx="11" ry="3.4" fill="#7fae8a"/>
-          <path d="M30 180c-3-4-3-9 0-13 3 4 3 9 0 13z" fill="#f4a6b8"/>
-          <path d="M30 180c-5 0-8-3-9-7 4 0 7 2 9 7zM30 180c5 0 8-3 9-7-4 0-7 2-9 7z" fill="#e48aa8"/>
-          <ellipse cx="214" cy="182" rx="11" ry="3.4" fill="#7fae8a"/>
-          <path d="M214 180c-3-4-3-9 0-13 3 4 3 9 0 13z" fill="#f4a6b8"/>
-          <path d="M214 180c-5 0-8-3-9-7 4 0 7 2 9 7zM214 180c5 0 8-3 9-7-4 0-7 2-9 7z" fill="#e48aa8"/>
-        </g>
-
-        <!-- KRISHNA -->
-        <g class="kr">
-          <ellipse cx="68" cy="177" rx="7" ry="4" fill="#5b93c9"/>
-          <ellipse cx="89" cy="177" rx="7" ry="4" fill="#5b93c9"/>
-          <path d="M58 128L98 128L105 172Q78 177 51 172Z" fill="#f2c14e"/>
-          <path d="M51 172Q78 177 105 172" stroke="#e08a2e" stroke-width="3" fill="none" stroke-linecap="round"/>
-          <path d="M60 108Q78 100 96 108L98 128L58 128Z" fill="#6fa8dc"/>
-          <rect x="56" y="124" width="44" height="7" rx="3.5" fill="#e07a3c"/>
-          <path d="M62 108Q78 134 94 108" stroke="#e48aa8" stroke-width="4" stroke-linecap="round" stroke-dasharray=".1 6" fill="none"/>
-          <path d="M62 108Q78 134 94 108" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-dasharray=".1 6" stroke-dashoffset="3" fill="none"/>
-          <circle cx="48" cy="80" r="5" fill="#6fa8dc"/><circle cx="108" cy="80" r="5" fill="#6fa8dc"/>
-          <circle cx="48" cy="88" r="2.5" fill="#e0b44c"/><circle cx="108" cy="88" r="2.5" fill="#e0b44c"/>
-          <circle cx="78" cy="76" r="30" fill="#6fa8dc"/>
-          <path d="M48 74Q46 42 78 42Q110 42 108 74Q104 60 92 58Q80 64 64 58Q52 62 48 74Z" fill="#2b2340"/>
-          <path d="M56 52Q78 40 100 52L98 44Q78 32 58 44Z" fill="#e0b44c" stroke="#b8893b" stroke-width=".8"/>
-          <circle cx="78" cy="43" r="2.5" fill="#8e1b2c"/>
-          <path d="M90 42Q94 28 98 18" stroke="#3f8f6a" stroke-width="1.5" fill="none"/>
-          <ellipse cx="100" cy="16" rx="6.5" ry="10" transform="rotate(20 100 16)" fill="#3f8f6a"/>
-          <ellipse cx="100.5" cy="17" rx="3.6" ry="5.6" transform="rotate(20 100.5 17)" fill="#2c5aa0"/>
-          <circle cx="100.8" cy="17.6" r="1.7" fill="#e0b44c"/>
-          <path d="M75 65L78 72L81 65" stroke="#e0b44c" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-          <path d="M64 80Q69 84 74 80M82 80Q87 84 92 80" stroke="#2b2340" stroke-width="2" fill="none" stroke-linecap="round"/>
-          <circle cx="62" cy="88" r="4.5" fill="#e48aa8" opacity=".55"/><circle cx="94" cy="88" r="4.5" fill="#e48aa8" opacity=".55"/>
-          <path d="M75 91Q78 94 81 91" stroke="#2b2340" stroke-width="1.6" fill="none" stroke-linecap="round"/>
-          <path d="M80 98L126 110" stroke="#8b5a2b" stroke-width="4.5" stroke-linecap="round"/>
-          <circle cx="100" cy="103.2" r=".9" fill="#f2c14e"/><circle cx="108" cy="105.3" r=".9" fill="#f2c14e"/><circle cx="116" cy="107.4" r=".9" fill="#f2c14e"/>
-          <path d="M64 112Q78 112 92 101M94 113Q104 113 112 106" stroke="#6fa8dc" stroke-width="7" stroke-linecap="round" fill="none"/>
-          <circle cx="93" cy="101" r="5" fill="#6fa8dc"/><circle cx="112" cy="106" r="5" fill="#6fa8dc"/>
-        </g>
-
-        <!-- RADHA -->
-        <g class="ra">
-          <path d="M128 110Q122 38 162 38Q202 38 196 110Z" fill="#f4a6b8"/>
-          <path d="M128 110Q122 38 162 38Q202 38 196 110" stroke="#e0b44c" stroke-width="1.6" fill="none"/>
-          <ellipse cx="152" cy="181" rx="6" ry="3.5" fill="#c23b55"/>
-          <ellipse cx="172" cy="181" rx="6" ry="3.5" fill="#c23b55"/>
-          <path d="M142 128Q162 122 182 128L198 176Q162 184 126 176Z" fill="#d9536f"/>
-          <path d="M130 166Q162 173 194 166" stroke="#f2d27a" stroke-width="2.6" stroke-linecap="round" stroke-dasharray=".1 5" fill="none"/>
-          <path d="M126 176Q162 184 198 176" stroke="#e0b44c" stroke-width="3.5" fill="none" stroke-linecap="round"/>
-          <path d="M146 106Q162 100 178 106L182 130L142 130Z" fill="#8e1b2c"/>
-          <path d="M146 106Q160 116 182 130L180 137Q158 124 143 112Z" fill="#f4a6b8"/>
-          <circle cx="135" cy="92" r="2.8" fill="#e0b44c"/><circle cx="135" cy="97" r="1.2" fill="#e0b44c"/>
-          <circle cx="189" cy="92" r="2.8" fill="#e0b44c"/><circle cx="189" cy="97" r="1.2" fill="#e0b44c"/>
-          <circle cx="162" cy="80" r="28" fill="#f6d2b5"/>
-          <path d="M134 80Q132 50 162 50Q192 50 190 80Q186 64 174 60Q166 58 162 62Q158 58 150 60Q138 64 134 80Z" fill="#2b2340"/>
-          <path d="M135 76Q133 92 138 104M189 76Q191 92 186 104" stroke="#2b2340" stroke-width="4" stroke-linecap="round" fill="none"/>
-          <path d="M162 50L162 60" stroke="#e0b44c" stroke-width="1"/>
-          <circle cx="162" cy="62" r="2.2" fill="#e0b44c"/>
-          <circle cx="162" cy="70" r="1.8" fill="#8e1b2c"/>
-          <path d="M148 82Q153 86 158 82M166 82Q171 86 176 82M148 82l-2.4-1.6M176 82l2.4-1.6" stroke="#2b2340" stroke-width="2" fill="none" stroke-linecap="round"/>
-          <circle cx="146" cy="90" r="4.5" fill="#e48aa8" opacity=".55"/><circle cx="178" cy="90" r="4.5" fill="#e48aa8" opacity=".55"/>
-          <path d="M159 93Q162 96 165 93" stroke="#a8394a" stroke-width="1.6" fill="none" stroke-linecap="round"/>
-          <circle cx="166.5" cy="88" r="1.8" stroke="#e0b44c" stroke-width=".9" fill="none"/>
-          <path d="M148 112Q150 120 156 122M176 112Q174 120 168 122" stroke="#8e1b2c" stroke-width="7" stroke-linecap="round" fill="none"/>
-          <circle cx="157" cy="122" r="4.5" fill="#f6d2b5"/><circle cx="167" cy="122" r="4.5" fill="#f6d2b5"/>
-          <path d="M162 104Q157 110 162 118Q167 110 162 104Z" fill="#e48aa8"/>
-          <path d="M162 118Q154 117 152 108Q158 110 162 118ZM162 118Q170 117 172 108Q166 110 162 118Z" fill="#f4a6b8"/>
-        </g>
-      </svg>
+      <div class="rk-frame"><img class="rk" src="radha-krishna.webp" width="880" height="957" data-i18n-alt="rkAlt" alt="Little Krishna and Radha among lotus flowers"></div>
 
       <h1 class="names"><span data-i18n="groom"></span><span class="amp">&amp;</span><span data-i18n="bride"></span></h1>
       <p class="date-line" data-i18n="dateLine"></p>
@@ -525,7 +446,7 @@ const T = {
   en:{
     coverKicker:"You are warmly invited",
     openBtn:"Open Invitation",
-    rkAlt:"Little Krishna playing the flute beside little Radha holding a lotus",
+    rkAlt:"Little Krishna and Radha among lotus flowers",
     kicker:"Together with their families",
     title:"Thalikettu in Vrischikam",
     alt:"Illustrated portrait of Manu and Anisha at a temple",
@@ -553,7 +474,7 @@ const T = {
   ml:{
     coverKicker:"സ്നേഹപൂർവ്വം ക്ഷണിക്കുന്നു",
     openBtn:"ക്ഷണക്കത്ത് തുറക്കുക",
-    rkAlt:"ഓടക്കുഴൽ വായിക്കുന്ന ഉണ്ണിക്കണ്ണനും താമരപ്പൂവുമായി രാധയും",
+    rkAlt:"താമരപ്പൂക്കൾക്കിടയിൽ ഉണ്ണിക്കണ്ണനും രാധയും",
     kicker:"ശുഭവിവാഹം",
     title:"വൃശ്ചികത്തിൽ താലികെട്ട്",
     alt:"ക്ഷേത്രമുറ്റത്ത് മനുവും അനിഷയും",
